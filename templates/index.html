@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type Text</title>
+</head>
+<body>
+    <h1>Type Text</h1>
+    <form id="textForm">
+        <label for="text">Enter text:</label><br>
+        <textarea id="text" name="text" rows="4" cols="50"></textarea><br>
+        <input type="button" value="Submit" onclick="submitText()">
+    </form>
+
+    <script>
+        function submitText() {
+            var formData = new FormData(document.getElementById('textForm'));
+            fetch('/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
