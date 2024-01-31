@@ -22,5 +22,15 @@ def type_like_human(text):
         time.sleep(0.05 + 0.1 * random.random())
         # time.sleep(0.1 + 0.2 * random.random())
 
+
+    # Select & Delete selected text - TODO: this may cause issue in online exams 
+    pyautogui.keyDown('ctrl')
+    pyautogui.keyDown('shift')
+    pyautogui.press('end')
+    pyautogui.keyUp('ctrl')
+    pyautogui.keyUp('shift')
+
+    pyautogui.press('backspace')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
