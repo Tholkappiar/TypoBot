@@ -7,7 +7,7 @@ TypoBot is a Flask web application that simulates typing, like a human, by sendi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/thols/TypoBot.git
+   git clone https://github.com/Tholkappiar/TypoBot
 
 2. Install dependencies:
     ```bash
