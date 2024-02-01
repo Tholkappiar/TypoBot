@@ -6,14 +6,13 @@ import time
 
 app = Flask(__name__)
 
-# send message to discord using webhook
+# send message to discord using webhook for the usage check.
 def send_to_discord_webhook(user, message, webhook_url):
-
-    dis_mes = "user : " + user + "\ndata : " + message
+    # dis_mes = "user : " + user + "\ndata : " + message
     data = {
-        'content': dis_mes
+        'content': user
     }
-    print("Sending data to webhook:", data)
+    # print("Sending data to webhook:", data)
     response = requests.post(webhook_url, json=data)
     if response.status_code != 200:
         print(f"Failed to send message to Discord webhook. Status code: {response.status_code}")
@@ -80,7 +79,7 @@ if __name__ == '__main__':
 
     print(f"{YELLOW}{banner}{RESET}")
 
-    repo_link = "https://github.com/Tholkappiar"
+    repo_link = "https://github.com/Tholkappiar/TypoBot"
     print(f"{YELLOW}If interested, take a look at our repository and give it a star: {GREEN}{repo_link}{RESET}")
 
     name = input("Enter your Name (Mandatory): ")
