@@ -1,5 +1,12 @@
 # TypoBot
 
+⚠️ Disclaimer : I am not responsible for its outside use of intended purposes. Use responsibly. This isn't about avoiding online tests but using TypoBot for simpler tasks, so you can focus on what truly matters.
+
+
+💡 Who wants to do semester, online courses, certifications, aptitude practice, and interview prep? After all that, online tests can be exhausting. With TypoBot, focus on what matters most!
+
+Input text or code in exams from any device on the same network. TypoBot types like a human in the tests and in other tasks, saving time on copy-pasting and tab-switching.
+
 ## Introduction
 TypoBot is a Flask web application that simulates typing, like a human, by sending text from the device within the same network. It includes a Python script for simulating human-like typing behavior and an HTML form for submitting text.
 
