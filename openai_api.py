@@ -1,21 +1,15 @@
 from openai import OpenAI
 
-client = OpenAI(api_key="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")
-
-# Define the user prompt message
+client = OpenAI(api_key="openAi_api")
 prompt = "Hello!"
 
-# Create a chatbot using ChatCompletion.create() function
 msg = input("Enter the msg to send to openai : ")
 completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-        {"role": "system", "content": msg},
-        {"role": "user", "content": prompt}
+        {"role": "system", "content": msg}
     ]
 )
-
-# Extract and print only the code snippet
 response = completion.choices[0].message.content
 code_start_index = response.find("```")
 code_end_index = response.rfind("```")

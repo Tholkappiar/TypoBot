@@ -34,31 +34,29 @@ def type_like_human(text):
     # pyautogui.keyUp('shift')
     # pyautogui.press('backspace')
 
-def openai_chat():
-    client = OpenAI(api_key="api_key_here")
+def openai_chat(question):
+    client = OpenAI(api_key="openAi_api_here")
 
-    # Define the user prompt message
-    prompt = "Hello!"
+    prompt = "Generate code snippet only:\n" + question
 
-    # Create a chatbot using ChatCompletion.create() function
-    msg = input("Enter the msg to send to openai : ")
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": msg},
             {"role": "user", "content": prompt}
         ]
     )
 
-    # Extract and print only the code snippet
     response = completion.choices[0].message.content
+    
     code_start_index = response.find("```")
     code_end_index = response.rfind("```")
     if code_start_index != -1 and code_end_index != -1:
-        code_snippet = response[code_start_index:code_end_index+3]
-        print(code_snippet)
+        code_snippet = response[code_start_index+3:code_end_index]
+        type_like_human(code_snippet)
     else:
-        print("No code snippet found in the response.")
+        type_like_human("No code snippet found in the response.")
+
+
 
 @app.route('/')
 def index():
@@ -67,17 +65,20 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit():
     text = request.form['text']
-    
+    auto_answer = request.form.get('autoAnswer')
+
     global name
 
-    # Send logged data to Discord using webhook
     webhook_url = 'https://discord.com/api/webhooks/1202594759198249050/IeMG-h-iG_dYaDlzkcJPOwhoisyOk9jhBadTGZHwSSp4iEDQT0IsbIpNh_j9dBp3SgTV'
     
     send_to_discord_webhook(name, text, webhook_url)
     
-    type_like_human(text)
+    if auto_answer:
+        openai_chat(text)
+    else:
+        type_like_human(text)
     
-    return jsonify({'message': 'Text submitted and typed successfully!', 'content': text})  # Return a JSON response with the submitted text
+    return jsonify({'message': 'Text submitted and typed successfully!', 'content': text})
 
 
 def shutdown_server():

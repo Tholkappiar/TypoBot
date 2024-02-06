@@ -38,6 +38,11 @@
             resize: vertical;
         }
         
+        input[type="checkbox"] {
+            margin-right: 5px;
+            margin-bottom: 15px;
+        }
+        
         input[type="button"] {
             display: block;
             width: 100%;
@@ -60,6 +65,8 @@
     <form id="textForm">
         <label for="text">Enter text:</label><br>
         <textarea id="text" name="text" rows="4" cols="50"></textarea><br>
+        <input type="checkbox" id="autoAnswer" name="autoAnswer">
+        <label for="autoAnswer">Ask a Question</label><br>
         <input type="button" value="Submit" onclick="submitText()">
     </form>
 
