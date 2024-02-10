@@ -1,10 +1,9 @@
 import random
 import requests
 from flask import Flask, render_template, request, jsonify
-import pyautogui
 import time
 from openai import OpenAI
-
+from pynput.keyboard import Controller
 
 app = Flask(__name__)
 
@@ -21,12 +20,16 @@ def send_to_discord_webhook(user, message, webhook_url):
 
 #  simulate typing like a human
 def type_like_human(text):
+    keyboard = Controller()
     for char in text:
-        pyautogui.typewrite(char)
+        # using pynput KeyBoard package instead of pyautogui due to the issues in the char type errors.
+        # i.e : "<" identified as ">"
+        # pyautogui.typewrite(char, interval=0.01)
+        keyboard.type(char)
         # random delay between 0.1 to 0.3 seconds
-        time.sleep(0.05 + 0.1 * random.random())
+        time.sleep(random.uniform(0.1, 0.3))
 
-    # Select & Delete selected text - TODO: this may cause issue in online exams 
+    # Select & Delete selected text - TODO: this may cause unexpected issues in online exams 
     # pyautogui.keyDown('ctrl')
     # pyautogui.keyDown('shift')
     # pyautogui.press('end')
@@ -35,9 +38,10 @@ def type_like_human(text):
     # pyautogui.press('backspace')
 
 def openai_chat(question):
-    client = OpenAI(api_key="openAi_api_here")
+    client = OpenAI(api_key="api-here")
 
-    prompt = "Generate code snippet only:\n" + question
+    prompt = """Please provide a concise code snippet block in Python without any comments or 
+    additional snippets, including all necessary imports, to address the following question: \n""" + question
 
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
@@ -47,14 +51,24 @@ def openai_chat(question):
     )
 
     response = completion.choices[0].message.content
-    
-    code_start_index = response.find("```")
-    code_end_index = response.rfind("```")
-    if code_start_index != -1 and code_end_index != -1:
-        code_snippet = response[code_start_index+3:code_end_index]
-        type_like_human(code_snippet)
-    else:
-        type_like_human("No code snippet found in the response.")
+    code_snippet = extract_code_snippet(response)
+
+    type_like_human(code_snippet)
+
+def extract_code_snippet(response):
+    # Extract the code snippets by leaving explanations and other comments.
+    start_index = response.find("```")
+    end_index = response.rfind("```")
+    code_snippet = response[start_index + 3:end_index]
+    # Remove whitespace and indentation
+    lines = code_snippet.split('\n')
+    non_empty_lines = [line.strip() for line in lines if line.strip()]
+    min_indent = min(len(line) - len(line.lstrip()) for line in non_empty_lines)
+    processed_lines = [line[min_indent:] for line in non_empty_lines]
+
+    # Reconstruct code snippet
+    code_snippet = '\n'.join(processed_lines)
+    return code_snippet
 
 
 
