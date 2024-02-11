@@ -1,0 +1,49 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:werkzeug:127.0.0.1 - - [11/Feb/2024 16:05:23] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:07:56,239 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-02-11 16:07:56,239 - INFO - [33mPress CTRL+C to quit[0m
+2024-02-11 16:08:25,693 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:08:26,589 - INFO - 127.0.0.1 - - [11/Feb/2024 16:08:26] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:10:23,578 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:10:24,564 - INFO - 127.0.0.1 - - [11/Feb/2024 16:10:24] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:11:07,126 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-02-11 16:11:07,126 - INFO - [33mPress CTRL+C to quit[0m
+2024-02-11 16:11:14,871 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:11:16,052 - INFO - 127.0.0.1 - - [11/Feb/2024 16:11:16] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:12:57,104 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-02-11 16:12:57,104 - INFO - [33mPress CTRL+C to quit[0m
+2024-02-11 16:13:15,653 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:13:16,891 - INFO - 127.0.0.1 - - [11/Feb/2024 16:13:16] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:13:44,053 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-02-11 16:13:44,053 - INFO - [33mPress CTRL+C to quit[0m
+2024-02-11 16:13:49,582 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:13:50,449 - INFO - 127.0.0.1 - - [11/Feb/2024 16:13:50] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:14:25,193 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-02-11 16:14:25,193 - INFO - [33mPress CTRL+C to quit[0m
+2024-02-11 16:14:31,521 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:14:32,320 - INFO - 127.0.0.1 - - [11/Feb/2024 16:14:32] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:15:12,921 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-02-11 16:15:12,921 - INFO - [33mPress CTRL+C to quit[0m
+2024-02-11 16:15:18,019 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:15:19,222 - INFO - 127.0.0.1 - - [11/Feb/2024 16:15:19] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:15:45,184 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-02-11 16:15:45,185 - INFO - [33mPress CTRL+C to quit[0m
+2024-02-11 16:15:49,796 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:15:51,298 - INFO - 127.0.0.1 - - [11/Feb/2024 16:15:51] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:16:03,221 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:16:04,182 - INFO - 127.0.0.1 - - [11/Feb/2024 16:16:04] "POST /get_code HTTP/1.1" 200 -
+2024-02-11 16:17:16,081 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-02-11 16:17:16,081 - INFO - [33mPress CTRL+C to quit[0m
+2024-02-11 16:17:24,787 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-02-11 16:17:26,101 - INFO - 127.0.0.1 - - [11/Feb/2024 16:17:26] "POST /get_code HTTP/1.1" 200 -

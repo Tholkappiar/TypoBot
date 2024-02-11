@@ -40,7 +40,7 @@ def type_like_human(text):
 def openai_chat(question):
     client = OpenAI(api_key="api-here")
 
-    prompt = """Please provide a concise code snippet block in Python without any comments or 
+    prompt = """Please provide a concise code snippet block without any comments or 
     additional snippets, including all necessary imports, to address the following question: \n""" + question
 
     completion = client.chat.completions.create(
@@ -54,7 +54,9 @@ def openai_chat(question):
     code_snippet = extract_code_snippet(response)
 
     type_like_human(code_snippet)
-
+    
+    # TODO:  create a new function to remove indentation before type like function.
+    
 def extract_code_snippet(response):
     # Extract the code snippets by leaving explanations and other comments.
     start_index = response.find("```")
