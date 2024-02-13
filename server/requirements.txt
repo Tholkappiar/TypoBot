@@ -1,0 +1,4 @@
+flask==3.0.1
+pynput==1.7.6
+openai==1.11.1
+requests==2.31.0

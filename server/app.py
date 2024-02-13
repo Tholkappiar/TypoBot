@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Configure logging
 logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="api-here")
 
 @app.route('/get_code', methods=['POST'])
 def get_code():
