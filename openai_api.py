@@ -1,21 +1,22 @@
-from openai import OpenAI
+import requests
 
-client = OpenAI(api_key="openAi_api")
-prompt = "Hello!"
+def get_code_from_server(name, question):
+    url = 'http://127.0.0.1:5000/get_code'
+    payload = {'question': question, 'name': name}
+    
+    try:
+        response = requests.post(url, json=payload)
+        if response.status_code == 200:
+            data = response.json()
+            code_snippet = data.get('code')
+            print("Code Snippet:")
+            print(code_snippet)
+        else:
+            print(f"Error: {response.status_code} - {response.text}")
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
-msg = input("Enter the msg to send to openai : ")
-completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": msg}
-    ]
-)
-response = completion.choices[0].message.content
-code_start_index = response.find("```")
-code_end_index = response.rfind("```")
-if code_start_index != -1 and code_end_index != -1:
-    code_snippet = response[code_start_index:code_end_index+3]
-    print(code_snippet)
-else:
-    print("No code snippet found in the response.")
-
+# Example usage:
+name = "your_name"
+question = "give the python program for hello world?"
+get_code_from_server(name, question)
