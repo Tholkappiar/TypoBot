@@ -1,77 +1,33 @@
-import random
-import requests
 from flask import Flask, render_template, request, jsonify
+import random
 import time
-from openai import OpenAI
+import requests
 from pynput.keyboard import Controller
 
 app = Flask(__name__)
 
-# send message to discord using webhook for the usage check.
-def send_to_discord_webhook(user, message, webhook_url):
-    # dis_mes = "user : " + user + "\ndata : " + message
-    data = {
-        'content': user
-    }
-    # print("Sending data to webhook:", data)
-    response = requests.post(webhook_url, json=data)
-    if response.status_code != 200:
-        print(f"Failed to send message to Discord webhook. Status code: {response.status_code}")
+def get_code_from_server(name,question):
+    url = 'http://127.0.0.1:5000/get_code'
+    payload = {'question': question,'name': name}
+    
+    try:
+        response = requests.post(url, json=payload)
+        if response.status_code == 200:
+            data = response.json()
+            code_snippet = data.get('code')
+            type_like_human(code_snippet)
+        else:
+            type_like_human(f"Error: {response.status_code} - {response.text}")
+    except Exception as e:
+        type_like_human(f"Error occurred: {e}")
 
 #  simulate typing like a human
 def type_like_human(text):
     keyboard = Controller()
     for char in text:
-        # using pynput KeyBoard package instead of pyautogui due to the issues in the char type errors.
-        # i.e : "<" identified as ">"
-        # pyautogui.typewrite(char, interval=0.01)
         keyboard.type(char)
-        # random delay between 0.1 to 0.3 seconds
         time.sleep(random.uniform(0.1, 0.3))
-
-    # Select & Delete selected text - TODO: this may cause unexpected issues in online exams 
-    # pyautogui.keyDown('ctrl')
-    # pyautogui.keyDown('shift')
-    # pyautogui.press('end')
-    # pyautogui.keyUp('ctrl')
-    # pyautogui.keyUp('shift')
-    # pyautogui.press('backspace')
-
-def openai_chat(question):
-    client = OpenAI(api_key="api-here")
-
-    prompt = """Please provide a concise code snippet block in Python without any comments or 
-    additional snippets, including all necessary imports, to address the following question: \n""" + question
-
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "user", "content": prompt}
-        ]
-    )
-
-    response = completion.choices[0].message.content
-    code_snippet = extract_code_snippet(response)
-
-    type_like_human(code_snippet)
-
-def extract_code_snippet(response):
-    # Extract the code snippets by leaving explanations and other comments.
-    start_index = response.find("```")
-    end_index = response.rfind("```")
-    code_snippet = response[start_index + 3:end_index]
-    # Remove whitespace and indentation
-    lines = code_snippet.split('\n')
-    non_empty_lines = [line.strip() for line in lines if line.strip()]
-    min_indent = min(len(line) - len(line.lstrip()) for line in non_empty_lines)
-    processed_lines = [line[min_indent:] for line in non_empty_lines]
-
-    # Reconstruct code snippet
-    code_snippet = '\n'.join(processed_lines)
-    return code_snippet
-
-
-
+        
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -80,18 +36,10 @@ def index():
 def submit():
     text = request.form['text']
     auto_answer = request.form.get('autoAnswer')
-
-    global name
-
-    webhook_url = 'https://discord.com/api/webhooks/1202594759198249050/IeMG-h-iG_dYaDlzkcJPOwhoisyOk9jhBadTGZHwSSp4iEDQT0IsbIpNh_j9dBp3SgTV'
-    
-    send_to_discord_webhook(name, text, webhook_url)
-    
     if auto_answer:
-        openai_chat(text)
+        get_code_from_server(name,text)
     else:
         type_like_human(text)
-    
     return jsonify({'message': 'Text submitted and typed successfully!', 'content': text})
 
 
@@ -128,7 +76,7 @@ if __name__ == '__main__':
     name = input("Enter your Name (Mandatory): ")
 
     try:
-        app.run(host='0.0.0.0', port=5000)
+        app.run(host='0.0.0.0', port=5005)
     except KeyboardInterrupt:
         print("Keyboard interrupt detected. Shutting down the server...")
         shutdown_server()
